@@ -1,0 +1,185 @@
+#define M_PIN1 10
+
+
+#define M_DIRECTION1 12
+
+
+#define M_PIN2 11
+
+
+#define M_DIRECTION2 13
+
+ 
+
+
+
+
+
+// 初期化
+
+
+void setup(){
+
+ 
+
+  
+	 // LEDのピンを出力に
+
+ 
+	 pinMode(M_PIN1, OUTPUT);
+	 pinMode(M_PIN2, OUTPUT);
+
+
+ 	 pinMode(M_DIRECTION1, OUTPUT);
+	
+
+ pinMode(M_DIRECTION2, OUTPUT);
+
+  	 Serial.begin(115200);
+
+
+}
+
+
+
+
+
+
+int inByte = 0;
+
+
+// メインループ
+
+
+void loop() {
+  
+	//データを受信したらそのデータのinbyteに入れる
+  
+	if(Serial.available()>0){
+
+  
+		inByte = Serial.read();
+ 
+	}
+
+
+
+	//Serial.println(inByte);
+  
+
+  
+  
+	//前進
+
+  if(inByte == 'f') {
+	
+
+	analogWrite(M_PIN1,120);
+
+	
+		digitalWrite(M_DIRECTION1,HIGH);
+	
+
+	analogWrite(M_PIN2,120);
+
+	
+		digitalWrite(M_DIRECTION2,HIGH);
+
+
+	 }
+
+
+
+  
+
+	//後進
+
+  
+	else if(inByte == 'b') {
+
+	
+	analogWrite(M_PIN1,120);
+
+	
+	digitalWrite(M_DIRECTION1,LOW);
+
+	
+	analogWrite(M_PIN2,120);
+
+	
+	digitalWrite(M_DIRECTION2,LOW);
+
+
+	}
+
+
+
+ 
+
+	//左折
+
+  
+	else if(inByte == 'l') {
+
+
+	analogWrite(M_PIN1,120);
+
+
+	digitalWrite(M_DIRECTION1,HIGH);
+
+  
+	}
+
+
+
+  
+
+	//右折
+
+  
+	else if(inByte == 'r') {
+
+	
+	analogWrite(M_PIN2,120);
+
+	
+	digitalWrite(M_DIRECTION2,.HIGH);
+
+ 
+	}
+
+
+
+  
+
+	//停止
+
+  
+	else if(inByte == 's') {
+
+
+	analogWrite(M_PIN1,0);
+
+	
+	analogWrite(M_PIN2,0);
+
+  
+	}
+
+  
+
+  
+
+	delay(100);
+	
+
+}
+
+	
+
+
+
+ 
+
+
+}
